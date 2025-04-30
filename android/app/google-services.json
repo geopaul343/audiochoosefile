@@ -1,0 +1,82 @@
+{
+  "project_info": {
+    "project_number": "887192895309",
+    "project_id": "app-audio-analyzer",
+    "storage_bucket": "app-audio-analyzer.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:887192895309:android:16fd245eabaccacf2c4104",
+        "android_client_info": {
+          "package_name": "com.example.audiochoosefil"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "887192895309-hqmvsgdcf38d0mtv0p3rdm1d3afdlrs6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB_26jbsh-P0Pg80dpagDuSuCTFCk4aj5A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "887192895309-hqmvsgdcf38d0mtv0p3rdm1d3afdlrs6.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "887192895309-mccslgb9pteg4f8pr81vbiot33tojgre.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.healthCare"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:887192895309:android:b6fde55ef5581fdb2c4104",
+        "android_client_info": {
+          "package_name": "com.example.health_care"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "887192895309-hqmvsgdcf38d0mtv0p3rdm1d3afdlrs6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB_26jbsh-P0Pg80dpagDuSuCTFCk4aj5A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "887192895309-hqmvsgdcf38d0mtv0p3rdm1d3afdlrs6.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "887192895309-mccslgb9pteg4f8pr81vbiot33tojgre.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.healthCare"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
