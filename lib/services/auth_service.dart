@@ -2,11 +2,25 @@ import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
+
+
+
+
+
+  final String  predictaudioapiUrl = 'https://app-audio-analyzer-887192895309.us-central1.run.app/predict';
+
+
+
+
+
+
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final GoogleSignIn _googleSignIn = GoogleSignIn(scopes: ['email', 'profile']);
   final Dio _dio = Dio();
 
+
+ 
   // Get current user
   User? get currentUser => _auth.currentUser;
 
@@ -65,25 +79,32 @@ class AuthService {
     }
   }
 
-  Future<void> callProtectedApi(String idToken) async {
-    if (idToken != null) {
-      final response = await _dio.post(
-        'https://app-audio-analyzer-887192895309.us-central1.run.app/authentication',
-        options: Options(
-          headers: {
-            'Authorization': 'Bearer $idToken',
-            'Content-Type': 'application/json'
-          },
-        ),
-      );
 
-      if (response.statusCode == 200) {
-        print('Success!');
-      } else {
-        print('Error: ${response.data}');
-      }
+// Call protected API with ID token
+  Future<void> callProtectedApi(String idToken) async {
+    final response = await _dio.post(
+      'https://app-audio-analyzer-887192895309.us-central1.run.app/authentication',
+      options: Options(
+        headers: {
+          'Authorization': 'Bearer $idToken',
+          'Content-Type': 'application/json'
+        },
+      ),
+    );
+
+    if (response.statusCode == 200) {
+      print('Success!');
+    } else {
+      print('Error: ${response.data}');
     }
-  }
+    }
+
+
+
+
+
+
+
 
   // Handle Firebase Auth exceptions
   Exception _handleAuthException(FirebaseAuthException e) {
@@ -122,3 +143,41 @@ class AuthService {
     return Exception(message);
   }
 }
+
+
+
+
+
+
+
+// Future<void>sendAudioToApi()
+
+
+// fu
+
+
+// final headers = {
+//    'Authorization': 'Bearer $id', //${isFromGoogleLogin ? idToken:idToken}
+//    'Content-Type': 'application/json',
+//  };
+
+//  final ByteData byteData = await rootBundle.load('assets/audio/heart/artifact__201012172012.wav');
+//  final Uint8List wavBytes = byteData.buffer.asUint8List();
+//  final base64Audio = base64Encode(wavBytes); // Use loaded audio bytes
+//  final now = DateTime.now();
+//  final timestamp = formatDateToIso8601WithMilliseconds(now);
+//  String request_id = 'def456_${now.millisecondsSinceEpoch}'; // Make request ID unique
+//  String device_model = 'Flutter App Device'; // Consider getting actual device info
+//  String os_version = Platform.operatingSystemVersion; // Get actual OS info
+//  String app_id = 'Digital Steth';
+//  String app_version = '2.1.0'; // Consider getting app version dynamically
+//  final jsonPayload = {
+//    "requestId": request_id,
+//    "timestamp": timestamp,
+//    "audioType": "heart", // This might need to be dynamic based on context
+//    "metadata": {
+//      "device": {"model": device_model, "osVersion": os_version.toString()},
+//      "app": {"id": app_id, "version": app_version}
+//    },
+//    "audioData": {"format": 'wav', "content": base64Audio} // Use determined format
+//  };
