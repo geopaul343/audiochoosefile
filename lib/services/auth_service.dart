@@ -1,9 +1,11 @@
+import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final GoogleSignIn _googleSignIn = GoogleSignIn(scopes: ['email', 'profile']);
+  final Dio _dio = Dio();
 
   // Get current user
   User? get currentUser => _auth.currentUser;
@@ -50,6 +52,37 @@ class AuthService {
   // Sign out
   Future<void> signOut() async {
     await Future.wait([_auth.signOut(), _googleSignIn.signOut()]);
+  }
+
+  Future<String?> getuserIdToken() async {
+    if (currentUser != null) {
+      final idToken = await currentUser!.getIdToken();
+      print('ID Token: $idToken');
+      return idToken;
+    } else {
+      print('No user is currently signed in.');
+      return null;
+    }
+  }
+
+  Future<void> callProtectedApi(String idToken) async {
+    if (idToken != null) {
+      final response = await _dio.post(
+        'https://app-audio-analyzer-887192895309.us-central1.run.app/authentication',
+        options: Options(
+          headers: {
+            'Authorization': 'Bearer $idToken',
+            'Content-Type': 'application/json'
+          },
+        ),
+      );
+
+      if (response.statusCode == 200) {
+        print('Success!');
+      } else {
+        print('Error: ${response.data}');
+      }
+    }
   }
 
   // Handle Firebase Auth exceptions

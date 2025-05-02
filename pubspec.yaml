@@ -48,6 +48,7 @@ dependencies:
   # Platform-specific dependencies
   google_sign_in_android: ^6.2.1
   google_sign_in_ios: ^5.9.0
+  dio: ^5.8.0+1
 
 dev_dependencies:
   flutter_test:

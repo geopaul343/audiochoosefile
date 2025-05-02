@@ -1,3 +1,4 @@
+import 'package:audiochoosefil/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:audiochoosefil/screens/choosefilescreen.dart';
@@ -40,7 +41,7 @@ class _SignInScreenState extends State<SignInScreen> {
       if (mounted) {
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => const ChooseFile()),
+          MaterialPageRoute(builder: (context) => HomeScreen()),
         );
       }
     }
