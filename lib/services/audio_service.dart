@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'dart:io';
 import 'dart:typed_data';
 import 'package:dio/dio.dart';
@@ -19,15 +20,10 @@ class AudioService {
       }
 
       final idToken = await user.getIdToken();
-      print('ID Token: $idToken');
-      print('User ID: ${user.uid}');
 
       final now = DateTime.now();
       final timestamp = formatDateToIso8601WithMilliseconds(now);
       final requestId = 'req_${now.millisecondsSinceEpoch}';
-
-      print('Preparing request with ID: $requestId');
-      print('Timestamp: $timestamp');
 
       // Read the audio file
       final bytes = await audioFile.readAsBytes();
@@ -35,14 +31,14 @@ class AudioService {
       final base64Audio = base64Encode(wavBytes);
 
       // Print detailed information about the audio data
-      print('Audio file details:');
-      print('- File path: ${audioFile.path}');
-      print('- File size: ${bytes.length} bytes');
-      print('- Base64 length: ${base64Audio.length} characters');
-      print(
-          '- Base64 preview (first 100 chars): ${base64Audio.substring(0, 100)}...');
-      print(
-          '- Base64 preview (last 100 chars): ...${base64Audio.substring(base64Audio.length - 100)}');
+      // print('Audio file details:');
+      // print('- File path: ${audioFile.path}');
+      // print('- File size: ${bytes.length} bytes');
+      // print('- Base64 length: ${base64Audio.length} characters');
+      // print(
+      //     '- Base64 preview (first 100 chars): ${base64Audio.substring(0, 100)}...');
+      // print(
+      //     '- Base64 preview (last 100 chars): ...${base64Audio.substring(base64Audio.length - 100)}');
 
       // Prepare the request payload
       final jsonPayload = {
@@ -59,7 +55,7 @@ class AudioService {
         "audioData": {"format": "wav", "content": base64Audio}
       };
 
-      print('Sending request to: $_baseUrl/sendaudio');
+      print('Sending request to: $_baseUrl/predict-test');
       if (idToken != null) {
         print(
             'Request headers: Authorization: Bearer ${idToken.substring(0, 20)}...');
@@ -79,10 +75,8 @@ class AudioService {
         ),
       );
 
-      print('Response status code: ${response.statusCode}');
-      print('Response data: ${response.data}');
-
       if (response.statusCode == 200) {
+        log(response.data.toString());
         return response.data;
       } else {
         print('Error response: ${response.statusMessage}');
@@ -97,9 +91,6 @@ class AudioService {
 
 String formatDateToIso8601WithMilliseconds(DateTime dateTime) {
   return dateTime.toUtc().toIso8601String().replaceFirstMapped(
-          RegExp(r'\.\d+'),
-          (match) =>
-              '.${match.group(0)!.substring(1, 7)}' // limit to microseconds
-          ) +
+          RegExp(r'\.\d+'), (match) => '.${match.group(0)!.substring(1, 7)}') +
       'Z';
 }
